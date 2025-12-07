@@ -2,6 +2,9 @@
 
 This repository presents an **Agentic AI** system for online credit‑card fraud detection, developed as part of a Master's thesis. It implements a retrieval‑augmented, multi‑agent architecture (retriever, fraud analyst, report generator) orchestrated with CrewAI: semantic search over historical transactions (FAISS) supplies contextual evidence to LLM‑based risk reasoning, an optional human‑in‑the‑loop (HITL) step supports review and feedback, and the pipeline produces audit‑ready reports plus rigorous evaluation (precision, recall, F1, AUC‑PR) and per‑request latency analysis — can be ran without docker, but also reproducible and containerized via Docker/Docker Compose.
 
+#### High-level Architecture diagram
+![Request sequence](images/solution-concept2.png)
+
 ---
 
 ## 📂 Repository Structure
@@ -215,13 +218,10 @@ This project uses an agentic, retrieval‑augmented architecture designed for ac
 - Evaluation outputs: `evaluation/evaluation_metrics.json`, `evaluation/evaluation_metrics.md`, `evaluation_aucpr.png`, `evaluation_confusion_matrix.png`.
 
 ### Diagrams
-Below are the high/low-level architecture of the system.
+Below is the low-level architecture of the system.
 
 #### Low-level Architecture diagram
 ![Architecture diagram](images/solution-concept.png)
-
-#### High-level Architecture diagram
-![Request sequence](images/solution-concept2.png)
 
 ---
 
