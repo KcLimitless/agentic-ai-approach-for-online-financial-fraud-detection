@@ -1,0 +1,12 @@
+services:
+  fraud_detection_ai:
+    build: .
+    container_name: fraud_detection_ai
+    stdin_open: true    # Equivalent to `-i`
+    tty: true           # Equivalent to `-t`
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    command: python main.py  # Automatically run your app

@@ -1,0 +1,10 @@
+crewai
+crewai-tools
+langchain
+langchain-community
+openai
+python-dotenv
+faiss-cpu
+langchain-openai
+langchain-text-splitters
+pandas
