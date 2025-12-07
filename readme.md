@@ -193,32 +193,35 @@ Ensure your `all_results.json` includes per-request latency for accurate latency
 
 ## 🏗️ Architecture
 
-1. **Retriever Agent**
+This project uses an agentic, retrieval‑augmented architecture designed for accurate, auditable, and reproducible online fraud decisions. Responsibilities are separated into lightweight components so each part can be developed, tested, and scaled independently.
 
-   - Crafts 2–4 semantic queries as plain strings.
-   - Uses `TransactionVectorSearch` (FAISS) to fetch top‑5 similar transactions.
+- High-level flow: Client/User → Ingest → Retrieval → LLM-based analysis → Optional human review (HITL) → Reporting → Evaluation.
+- Design goals: interpretability (evidence + audit report), rigorous, end-to-end evaluation (precision/recall/F1, AUC‑PR, per-request latency), and reproducibility (Docker/Docker Compose).
 
-2. **Fraud Analyst Agent**
+### Components & Responsibilities
+- **Client / Ingest** — Entrypoint (`main.py`): accepts a transaction and submits it to the pipeline.
+- **Orchestration (CrewAI)** — Coordinates agent flow, retries, error handling and task distribution between agents.
+- **Retriever Agent** — Builds semantic queries and retrieves similar historical transactions (via FAISS embeddings) to provide contextual evidence.
+- **Vector DB (FAISS)** — Stores transaction embeddings and metadata for fast semantic lookup.
+- **Fraud Analyst Agent** — Combines context + heuristics based analysis, risk score and explanation, and outputs a classification plus supporting evidence and recommendation.
+- **Human-in-the-Loop (HITL)** — Optional approval/feedback step that can overwrite or confirm analyst decisions.
+- **Report Generator** — Produces the customer alert and an audit-ready report, writing per-request results to `reports/all_results.json`.
+- **Evaluation Module** — `evaluation/evaluator.py` computes confusion matrix, precision/recall/F1, AUC‑PR, and latency statistics; generates visualizations (PR curve, confusion matrix heatmap).
+- **Deployment** — `Docker/Docker Compose` enables reproducible, interactive runs (HITL), while the system can also be run locally without containers.
 
-   - Analyzes a single **target** transaction.
-   - Uses retrieved context + heuristic if data is sparse.
-   - Outputs risk score, classification, evidence, recommendation.
+### Data & Artifacts
+- Input schema: `transaction` objects (see `transaction/sample.py`).
+- Runtime outputs: `reports/all_results.json`, `reports/fraud_report.md`.
+- Evaluation outputs: `evaluation/evaluation_metrics.json`, `evaluation/evaluation_metrics.md`, `evaluation_aucpr.png`, `evaluation_confusion_matrix.png`.
 
-3. **Human-in-the-Loop**
+### Diagrams
+Below are the high/low-level architecture of the system.
 
-   - Optional approval or feedback step before final reporting.
+#### Low-level Architecture diagram
+![Architecture diagram](images/solution-concept.png)
 
-4. **Report Generator Agent**
-
-   - Produces:
-     - **Customer Notification** (short, plain‑language).
-     - **Fraud Team Report** (`fraud_report.md`, audit‑ready).
-
-5. **Evaluation Pipeline**
-
-   - Computes precision, recall, F1, AUC-PR, confusion matrix.
-   - Extracts and analyzes latency metrics from model outputs.
-   - Generates visualizations (PR curve, confusion matrix heatmap).
+#### High-level Architecture diagram
+![Request sequence](images/solution-concept2.png)
 
 ---
 
@@ -255,7 +258,7 @@ sample_transaction = {
 }
 ```
 
-This transaction is processed by the Retriever Agent (for context retrieval), the Fraud Analyst Agent (for risk scoring and classification), and the Report Generator Agent (for alerts and final reports). The app retrieves any historical context available, analyzes this sample, and produces both a console alert and a detailed markdown report.
+This transaction is processed by the Retriever Agent (for context retrieval), the Fraud Analyst Agent (for fraud analysis, risk scoring and classification), and the Report Generator Agent (for alerts and final reports generation). The app retrieves any historical context available, analyzes this sample together with the input transaction, and produces both a console alert and a detailed markdown report.
 
 To run the test with this sample transaction:
 
