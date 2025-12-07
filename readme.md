@@ -1,6 +1,6 @@
 # Agentic AI Approach for Online Fraud Detection
 
-This repository contains an **Agentic AI** pipeline for **online credit card fraud detection**. It leverages multiple specialized agents, semantic retrieval, LLM-based reasoning, a human-in-the-loop (HITL) process, and comprehensive evaluation metrics—all containerized via Docker Compose.
+This repository presents an **Agentic AI** system for online credit‑card fraud detection, developed as part of a Master's thesis. It implements a retrieval‑augmented, multi‑agent architecture (retriever, fraud analyst, report generator) orchestrated with CrewAI: semantic search over historical transactions (FAISS) supplies contextual evidence to LLM‑based risk reasoning, an optional human‑in‑the‑loop (HITL) step supports review and feedback, and the pipeline produces audit‑ready reports plus rigorous evaluation (precision, recall, F1, AUC‑PR) and per‑request latency analysis — can be ran without docker, but also reproducible and containerized via Docker/Docker Compose.
 
 ---
 
@@ -50,7 +50,7 @@ This repository contains an **Agentic AI** pipeline for **online credit card fra
 - **Python 3.10+**, Pydantic for schemas
 - **Scikit-learn, NumPy** for evaluation metrics
 - **Matplotlib, Seaborn** for visualization
-- **Docker Compose** for containerized, interactive deployment
+- **Docker/Docker Compose** for containerized, interactive deployment
 
 ---
 
