@@ -177,10 +177,76 @@ Based on evaluation runs:
 - Effective HITL integration for complex cases.
 - Reproducible results via containerization.
 
+### Sample Fraud Reports
+
+To illustrate the system's output, here are examples of fraud reports generated for specific transactions:
+
+**Example 1: High-Risk Transaction**
+
+#### Transaction Details
+| Field          | Value                          |
+|----------------|--------------------------------|
+| Transaction ID | b40c083614de1a1c8c8835d4bb01b380 |
+| Amount         | $60.00                         |
+| Category       | gas_transport                  |
+| Merchant       | Raynor Feest and Miller        |
+| Location       | (35.5494, -80.4226)            |
+| Timestamp      | 2025-04-15T15:47:12Z           |
+| User ID        | 4065133387262473               |
+
+#### Fraud Report
+```markdown
+# Fraud Report
+
+**Transaction ID:** b40c083614de1a1c8c8835d4bb01b380  
+**Risk Score:** 85 (HIGH)  
+**Key Evidence:**
+- Amount ($60.00) exceeds typical user spending patterns.
+- Location deviation from home city.
+- Unusual merchant category for user history.
+
+**Recommendation:** Block & Escalate  
+**Reasoning:** Combination of high amount and location anomaly suggests potential fraud.
+```
+
+#### Customer Alert
+```
+## Customer Notification
+We noticed a suspicious transaction of $60.00 at a gas transport merchant on April 15, 2025, at 15:47 UTC. This appears unusual based on your spending patterns. Please reply YES to confirm if you made this transaction, or NO to dispute it. If you have any questions, contact our support team.
+```
+
+**Example 2: Low-Risk Transaction**
+
+#### Transaction Details
+| Field          | Value                          |
+|----------------|--------------------------------|
+| Transaction ID | a1b2c3d4e5f67890123456789012345 |
+| Amount         | $25.00                         |
+| Category       | grocery                        |
+| Merchant       | Local Supermarket              |
+| Location       | (40.7128, -74.0060)            |
+| Timestamp      | 2025-04-16T10:30:00Z           |
+| User ID        | 1234567890123456               |
+
+#### Fraud Report
+```markdown
+# Fraud Report
+
+**Transaction ID:** a1b2c3d4e5f67890123456789012345  
+**Risk Score:** 15 (LOW)  
+**Key Evidence:**
+- Amount ($25.00) within normal range.
+- Merchant and location consistent with user history.
+- No unusual patterns detected.
+
+**Recommendation:** Approve  
+**Reasoning:** Transaction aligns with established user behavior.
+```
+
 ### Visualizations
 
-- Confusion Matrix Heatmap: ![Confusion Matrix](evaluation/evaluation_confusion_matrix1.png)
-- Precision-Recall Curve: ![Precision-Recall Curve](evaluation/pr_curve2.png)
+- Confusion Matrix Heatmap: ![Confusion Matrix](evaluation/evaluation/evaluation_confusion_matrix1.png)
+- Precision-Recall Curve: ![Precision-Recall Curve](evaluation/evaluation/pr_curve2.png)
 
 ## Conclusion
 
