@@ -33,16 +33,6 @@
 
 This Master's thesis presents an innovative Agentic AI system for online credit-card fraud detection, leveraging a retrieval-augmented, multi-agent architecture. The system employs CrewAI for orchestration, semantic search via FAISS for contextual evidence retrieval, and Large Language Models (LLMs) for risk reasoning. An optional human-in-the-loop (HITL) mechanism enhances decision-making, producing audit-ready reports. Rigorous evaluation metrics including precision, recall, F1-score, AUC-PR, and latency analysis ensure system reliability. The implementation is containerized using Docker for reproducibility and can operate locally or in interactive modes.
 
-## Architecture
-
-### Low-Level Diagram
-
-![Architecture diagram](images/solution-concept.png)
-
-### Data Flow
-
-Client → Ingest → Retrieval → Analysis → HITL (optional) → Reporting → Evaluation
-
 ## Introduction
 
 Online credit-card fraud poses significant challenges to financial institutions and consumers, with losses exceeding billions annually. Traditional rule-based and machine learning approaches often lack interpretability and adaptability to evolving fraud patterns. This thesis introduces a novel Agentic AI framework that combines retrieval-augmented generation (RAG) with multi-agent systems and an optional Human-in-the-Loop to provide transparent, evidence-based fraud detection.
@@ -78,6 +68,24 @@ This work builds on these foundations by integrating RAG with multi-agent orches
 ## Methodology
 
 The methodology employs a design science research approach, focusing on artifact development and evaluation.
+
+## Architecture
+
+### Low-Level Diagram
+
+![Architecture diagram](images/solution-concept.png)
+
+### Data Flow
+
+Client → Ingest → Retrieval → Analysis → HITL (optional) → Reporting → Evaluation
+
+### Key Components
+
+- **Retriever Agent**: Generates semantic queries and retrieves similar transactions.
+- **Fraud Analyst Agent**: Performs risk assessment using contextual evidence.
+- **Report Generator Agent**: Creates user alerts and detailed audit reports.
+- **HITL Mechanism**: Allows human intervention for decision refinement.
+
 
 ### Research Design
 
@@ -142,13 +150,6 @@ The methodology employs a design science research approach, focusing on artifact
 ├── environment.yml              # Conda environment
 └── README.md                    # This documentation
 ```
-
-### Key Components
-
-- **Retriever Agent**: Generates semantic queries and retrieves similar transactions.
-- **Fraud Analyst Agent**: Performs risk assessment using contextual evidence.
-- **Report Generator Agent**: Creates user alerts and detailed audit reports.
-- **HITL Mechanism**: Allows human intervention for decision refinement.
 
 ## Evaluation
 
