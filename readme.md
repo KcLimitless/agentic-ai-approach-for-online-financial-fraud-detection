@@ -8,6 +8,7 @@
 ## Table of Contents
 
 - [Abstract](#abstract)
+- [Architecture](#architecture)
 - [Introduction](#introduction)
 - [Literature Review](#literature-review)
 - [Methodology](#methodology)
@@ -18,7 +19,6 @@
 - [Future Work](#future-work)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Architecture](#architecture)
 - [Configuration](#configuration)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -32,6 +32,16 @@
 ## Abstract
 
 This Master's thesis presents an innovative Agentic AI system for online credit-card fraud detection, leveraging a retrieval-augmented, multi-agent architecture. The system employs CrewAI for orchestration, semantic search via FAISS for contextual evidence retrieval, and Large Language Models (LLMs) for risk reasoning. An optional human-in-the-loop (HITL) mechanism enhances decision-making, producing audit-ready reports. Rigorous evaluation metrics including precision, recall, F1-score, AUC-PR, and latency analysis ensure system reliability. The implementation is containerized using Docker for reproducibility and can operate locally or in interactive modes.
+
+## Architecture
+
+### Low-Level Diagram
+
+![Architecture diagram](images/solution-concept.png)
+
+### Data Flow
+
+Client → Ingest → Retrieval → Analysis → HITL (optional) → Reporting → Evaluation
 
 ## Introduction
 
@@ -159,6 +169,11 @@ python evaluation/evaluator.py --manual-conf 32 1 3 64 --results reports/all_res
 # Where 32 1 3 64 represent TN FP FN TP (True Negatives, False Positives, False Negatives, True Positives)
 ```
 
+### Visualizations
+
+- Confusion Matrix Heatmap: ![Confusion Matrix](evaluation/evaluation/evaluation_confusion_matrix1.png)
+- Precision-Recall Curve: ![Precision-Recall Curve](evaluation/evaluation/pr_curve2.png)
+
 ## Results
 
 ### Performance Metrics
@@ -243,11 +258,6 @@ We noticed a suspicious transaction of $60.00 at a gas transport merchant on Apr
 **Reasoning:** Transaction aligns with established user behavior.
 ```
 
-### Visualizations
-
-- Confusion Matrix Heatmap: ![Confusion Matrix](evaluation/evaluation/evaluation_confusion_matrix1.png)
-- Precision-Recall Curve: ![Precision-Recall Curve](evaluation/evaluation/pr_curve2.png)
-
 ## Conclusion
 
 This thesis demonstrates the efficacy of Agentic AI in fraud detection, achieving high accuracy while maintaining interpretability. The retrieval-augmented multi-agent approach addresses key limitations of traditional methods, providing a scalable framework for financial security.
@@ -314,16 +324,6 @@ docker-compose build
 2. Execute pipeline via `main.py`.
 3. Review outputs in `reports/` directory.
 4. Evaluate using `evaluation/evaluator.py`.
-
-## Architecture
-
-### Low-Level Diagram
-
-![Architecture diagram](images/solution-concept.png)
-
-### Data Flow
-
-Client → Ingest → Retrieval → Analysis → HITL (optional) → Reporting → Evaluation
 
 ## Configuration
 
