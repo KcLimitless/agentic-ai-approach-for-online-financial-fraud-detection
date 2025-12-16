@@ -319,7 +319,8 @@ I would like to express my sincere gratitude to my supervisors:
 
 🧑‍🏫 Prof. Dr. Dr. h.c. Wolfram Hardt — Chair of Computer Engineering, TU Chemnitz
 
-🧑‍💼 Dr. Shadi Saleh — for his direct supervision, guidance, and extensive support throughout the project
+🧑‍💼 Dr. Shadi Saleh — for his direct supervision, guidance, and extensive support throughout the project.
+
 Your mentorship has significantly shaped my growth as a researcher and engineer.  
 
 Special thanks to the open-source community for providing the foundational tools and libraries used in this project. 
